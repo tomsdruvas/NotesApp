@@ -1,0 +1,43 @@
+.parent {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    }
+    
+.div1 {
+    background-color:#457B9D;
+    width: 25%;
+    height: 500px;
+    text-align:center;
+    padding-top: 2%;
+    
+}
+
+.div2 { 
+    background-color:#a8dadc;
+    width: 40%;
+    height: 500px;
+    padding-top: 2%;
+    text-align:center;
+
+
+ }
+
+ input[type=text] {
+    position: relative;
+    display: block;
+    margin : 0 auto;
+    width: 70%;
+    box-sizing: border-box;
+    line-height: 2em;
+    background-color: white;
+    border: 2px solid black;
+    background-image: url('searchIcon.svg');
+    background-repeat: no-repeat;
+    padding-left: 10%;
+    background-position: 2% 45%;
+    background-size: 10%;
+    border-radius: 10%;
+  }
