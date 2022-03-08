@@ -1,22 +1,30 @@
 import React from 'react'
 import '../styles/Style.css'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+
 
 const MainContainer = () => {
-  return (
+  return (<>
+    
     <div class="parent">
     <div class="div1">
-    <form>
   <input type="text" name="search" placeholder="Search.." />
-    </form>
-    
-    
-    
-    
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+    <FontAwesomeIcon icon={faPlusCircle} size="4x" className="addIcon"/>
     
     
      </div>
-    <div class="div2">Hello </div>
+    <div class="div2">Notes Title</div>
     </div>
+    </>
   )
 }
 
