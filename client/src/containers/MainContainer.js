@@ -5,6 +5,10 @@ import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {faXmark} from '@fortawesome/free-solid-svg-icons'
 import {faCheck} from '@fortawesome/free-solid-svg-icons'
+import {faUpload} from '@fortawesome/free-solid-svg-icons'
+import {faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 
@@ -57,11 +61,25 @@ const MainContainer = () => {
   <br />
   <br />
   <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
 
     </div>
     <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
     <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
+    <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
     <FontAwesomeIcon icon={faCheck} size="4x" className="checkIcon"/>
+    <FontAwesomeIcon icon={faPenToSquare} size="4x" className="editIcon"/>
+
+
+    
+
+
+    
 
     
 
