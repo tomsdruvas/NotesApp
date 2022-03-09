@@ -2,6 +2,11 @@ import React from 'react'
 import '../styles/Style.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
+import {faXmark} from '@fortawesome/free-solid-svg-icons'
+import {faCheck} from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 const MainContainer = () => {
@@ -25,20 +30,44 @@ const MainContainer = () => {
   <br />
   <br />
   <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
+  
+ 
+  
   </div>
 
     <FontAwesomeIcon icon={faPlusCircle} size="4x" className="addIcon"/>
     
     
      </div>
-    <div class="div2">Notes Title</div>
+    <div class="div2">Notes Title
+    <div class="divForList">
+
+
+    <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+    </div>
+    <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
+    <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
+    <FontAwesomeIcon icon={faCheck} size="4x" className="checkIcon"/>
+
+    
+
+
+    
+    </div>
     </div>
     </>
   )
