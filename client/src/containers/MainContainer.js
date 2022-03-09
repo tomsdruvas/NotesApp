@@ -10,6 +10,7 @@ const MainContainer = () => {
     <div class="parent">
     <div class="div1">
   <input type="text" name="search" placeholder="Search.." />
+  <div class="divForList">
   <br />
   <br />
   <br />
@@ -17,6 +18,21 @@ const MainContainer = () => {
   <br />
   <br />
   <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  </div>
 
     <FontAwesomeIcon icon={faPlusCircle} size="4x" className="addIcon"/>
     

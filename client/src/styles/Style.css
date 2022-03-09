@@ -35,9 +35,19 @@
 
     -webkit-box-shadow: 10px 0px 28px -5px rgba(0,0,0,0.36); 
     box-shadow: 10px 0px 28px -5px rgba(0,0,0,0.36);
+ }
 
-
-
+ .divForList {
+    background-color: #F1FAEE;
+     /* position: relative; */
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    border: 1px solid black;
+    -webkit-box-shadow: inset 0px 0px 9px 1px rgba(0,0,0,0.15); 
+    box-shadow: inset 0px 0px 9px 1px rgba(0,0,0,0.15);
 
  }
 
@@ -61,7 +71,7 @@
 .addIcon{
     color: #1D3557;
     position: relative;
-    bottom: 8%
+    bottom: 10px
 
 }
 
