@@ -11,6 +11,8 @@ import {faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import NotesList from '../components/NotesList';
 import NotesContent from '../components/NotesContent';
 import NotesAdd from '../components/NotesAdd';
+import moment from 'moment';
+
 
 
 
@@ -22,7 +24,8 @@ const MainContainer = () => {
 
   const [notesItems, setNotesItems] = useState([]);
   const [selectedNotesItem, setSelectedNotesItem] = useState({});
-  const [appMode, setAppMode] = useState("selected")
+  const [appMode, setAppMode] = useState("selected");
+  // const [activeNote, setActiveNote] = useState({});
 
   const requestAll = function(){
     const request = new Request();
@@ -44,7 +47,7 @@ const MainContainer = () => {
         <>
         <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
         <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
-        <FontAwesomeIcon icon={faCheck} size="4x" className="checkIcon"/>
+        <FontAwesomeIcon onClick={handleSubmitNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
       )
     }
@@ -68,11 +71,28 @@ const MainContainer = () => {
     }
   }
 
+  const handleNotesPost = function(notesItemObj){
+    const request = new Request();
+    request.post("/api/notes", notesItemObj)
+    .then(() => requestAll())
+  }
+
+
+  const handleSubmitNotesItem = () => {
+    if (!selectedNotesItem.id){
+      if(!selectedNotesItem.title || !selectedNotesItem.content){
+         return alert("You have not filled everything in")
+      }
+      handleNotesPost(selectedNotesItem)
+
+    }
+  }
+
   const toggleComponent = () => {
     if (appMode === "add"){
       return(
         <>
-          <NotesAdd />
+          <NotesAdd selectedNotesItem={selectedNotesItem} handleNewNotesObj={(newNotesObj) => setSelectedNotesItem(newNotesObj)} />
         </>
       )
     }

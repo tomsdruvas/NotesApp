@@ -1,12 +1,26 @@
 import React from 'react'
+import moment from 'moment';
 
-const NotesAdd = () => {
+
+
+const NotesAdd = ({handleNewNotesObj, selectedNotesItem}) => {
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        handleNewNotesObj({
+            ...selectedNotesItem,
+        [e.target.name]: value,
+        postDate: moment().format('MMM Do YYYY, h:mm'),
+        updateDate: moment().format('MMM Do YYYY, h:mm')
+        });
+  
+      }
+
+
   return (
-    <form action="submit">
-    {/* <label htmlFor="title">Title:</label> */}
-    <input placeholder="Title" className="titleInput" type="text" name="title" id="" />
-    <textarea className="contentInput" placeholder="Content of the notes" name="content" id="" cols="30" rows="10"></textarea>
-
+    <form onChange={handleChange} action="submit">
+    <input required placeholder="Title" className="titleInput" type="text" name="title" id="" />
+    <textarea required className="contentInput" placeholder="Content of the notes" name="content" id="" cols="30" rows="10"></textarea>
 
     </form>
   )
