@@ -9,6 +9,8 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons'
 import {faUpload} from '@fortawesome/free-solid-svg-icons'
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import NotesList from '../components/NotesList';
+import NotesContent from '../components/NotesContent';
+import NotesAdd from '../components/NotesAdd';
 
 
 
@@ -20,7 +22,7 @@ const MainContainer = () => {
 
   const [notesItems, setNotesItems] = useState([]);
   const [selectedNotesItem, setSelectedNotesItem] = useState({});
-  const [appMode, setAppMode] = useState("")
+  const [appMode, setAppMode] = useState("selected")
 
   const requestAll = function(){
     const request = new Request();
@@ -66,6 +68,23 @@ const MainContainer = () => {
     }
   }
 
+  const toggleComponent = () => {
+    if (appMode === "add"){
+      return(
+        <>
+          <NotesAdd />
+        </>
+      )
+    }
+    else if (appMode === "selected"){
+      return(
+        <>
+    <NotesContent selectedNotesItem={selectedNotesItem} />
+        </>
+      )
+    }
+  }
+
   const handleSelectNotesItemClick = (notesItemObject) => {
     setAppMode("selected")
     setSelectedNotesItem(notesItemObject)
@@ -74,7 +93,7 @@ const MainContainer = () => {
     
     <div className="parent">
     <div className="div1">
-  <input type="text" name="search" placeholder="Search.." />
+  <input className="searchInput" type="text" name="search" placeholder="Search.." />
     <NotesList notesItems={notesItems} handleSelectNotesItemClick={(value) => handleSelectNotesItemClick(value)} />
   
 
@@ -83,37 +102,8 @@ const MainContainer = () => {
     
      </div>
     <div className="div2">
-    {selectedNotesItem.title ?? "Welcome!"}
-    <br />
-    Post date: {selectedNotesItem.postDate ?? Date.now()}
-    Update date: {selectedNotesItem.updateDate ?? Date.now()}
+    {toggleComponent()}
 
-    <div className="divForContent">
-    {selectedNotesItem.content ?? "Welcome to my new notes taking app"}
-
-
-    <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-
-
-    </div>
     {/* <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
     <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
     <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
