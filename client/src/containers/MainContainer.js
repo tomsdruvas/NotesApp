@@ -19,6 +19,8 @@ import NotesList from '../components/NotesList';
 const MainContainer = () => {
 
   const [notesItems, setNotesItems] = useState([]);
+  const [selectedNotesItem, setSelectedNotesItem] = useState({});
+  const [appMode, setAppMode] = useState("")
 
   const requestAll = function(){
     const request = new Request();
@@ -34,20 +36,60 @@ const MainContainer = () => {
     requestAll();
   }, [])
 
+  const showContentIcons = () => {
+    if(appMode === "add"){
+      return (
+        <>
+        <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
+        <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
+        <FontAwesomeIcon icon={faCheck} size="4x" className="checkIcon"/>
+        </>
+      )
+    }
+    else if (appMode === "edit"){
+      <>
+        <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
+        <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
+        <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
+        <FontAwesomeIcon icon={faCheck} size="4x" className="checkIcon"/>
+        </>
+
+    }
+    else if (appMode === "selected"){
+      return(
+        <>
+        <FontAwesomeIcon icon={faPenToSquare} size="4x" className="editIcon"/>
+        <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
+        </>
+      )
+
+    }
+  }
+
+  const handleSelectNotesItemClick = (notesItemObject) => {
+    setAppMode("selected")
+    setSelectedNotesItem(notesItemObject)
+  }
   return (<>
     
     <div className="parent">
     <div className="div1">
   <input type="text" name="search" placeholder="Search.." />
-    <NotesList notesItems={notesItems} />
+    <NotesList notesItems={notesItems} handleSelectNotesItemClick={(value) => handleSelectNotesItemClick(value)} />
   
 
-    <FontAwesomeIcon icon={faPlusCircle} size="4x" className="addIcon"/>
+    <FontAwesomeIcon onClick={() => setAppMode("add")} icon={faPlusCircle} size="4x" className="addIcon"/>
     
     
      </div>
-    <div className="div2">Notes Title
-    <div className="divForList">
+    <div className="div2">
+    {selectedNotesItem.title ?? "Welcome!"}
+    <br />
+    Post date: {selectedNotesItem.postDate ?? Date.now()}
+    Update date: {selectedNotesItem.updateDate ?? Date.now()}
+
+    <div className="divForContent">
+    {selectedNotesItem.content ?? "Welcome to my new notes taking app"}
 
 
     <br />
@@ -72,11 +114,12 @@ const MainContainer = () => {
 
 
     </div>
-    <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
+    {/* <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
     <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
     <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
     <FontAwesomeIcon icon={faCheck} size="4x" className="checkIcon"/>
-    <FontAwesomeIcon icon={faPenToSquare} size="4x" className="editIcon"/>
+    <FontAwesomeIcon icon={faPenToSquare} size="4x" className="editIcon"/> */}
+    {showContentIcons()}
 
 
     

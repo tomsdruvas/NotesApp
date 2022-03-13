@@ -15,8 +15,6 @@
     padding-top: 2%;
     border-radius: 15px 0 0 15px;
     border: 3px solid #457B9D;
-    /* -webkit-box-shadow: 0px 0px 30px -6px rgba(0,0,0,0.5); 
-    box-shadow: 0px 0px 30px -6px rgba(0,0,0,0.5); */
     -webkit-box-shadow: -10px 0px 28px -5px rgba(0,0,0,0.36); 
     box-shadow: -10px 0px 28px -5px rgba(0,0,0,0.36);
 
@@ -45,6 +43,24 @@
     border: 1px solid black;
     -webkit-box-shadow: inset 0px 0px 9px 1px rgba(0,0,0,0.15); 
     box-shadow: inset 0px 0px 9px 1px rgba(0,0,0,0.15);
+    height: 350px;
+    overflow: scroll;
+
+ }
+
+ .divForContent {
+    background-color: #F1FAEE;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 6%;
+    margin-bottom: 10%;
+    border: 1px solid black;
+    -webkit-box-shadow: inset 0px 0px 9px 1px rgba(0,0,0,0.15); 
+    box-shadow: inset 0px 0px 9px 1px rgba(0,0,0,0.15);
+    height: 350px;
+    overflow: scroll;
+
 
  }
 
@@ -142,6 +158,24 @@
     opacity: 50%;
     cursor: pointer;
 }
+
+.notesItemTitle {
+    border: 2px solid black;
+    width: 85%;
+    position: relative;
+    display: block;
+    margin : 0 auto;
+    margin-top: 5%;
+    border-radius: 5px;
+    background-color: #a8dadc;
+    height: 14.5%;
+    cursor: pointer;
+}
+
+.notesItemTitle :hover {
+    transform: scale(1.1);
+}
+
 
 
 
