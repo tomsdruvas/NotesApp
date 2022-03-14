@@ -12,6 +12,7 @@ import NotesList from '../components/NotesList';
 import NotesContent from '../components/NotesContent';
 import NotesAdd from '../components/NotesAdd';
 import NotesEdit from '../components/NotesEdit';
+import { NotesSearch } from '../components/NotesSearch';
 
 
 
@@ -27,6 +28,8 @@ const MainContainer = () => {
   const [appMode, setAppMode] = useState("selected");
   const [activeEditNote, setActiveEditNote] = useState({});
   const [newNotesObject, setNewNotesObject] = useState({});
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const requestAll = function(){
     const request = new Request();
@@ -41,6 +44,15 @@ const MainContainer = () => {
   useEffect(()=>{
     requestAll();
   }, [])
+
+  useEffect(() => {
+    
+    const results = notesItems.filter(notesItem =>
+      notesItem.title.toLowerCase().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [searchTerm, notesItems]);
+
 
   const showContentIcons = () => {
     if(appMode === "add"){
@@ -57,7 +69,7 @@ const MainContainer = () => {
         <>
         <FontAwesomeIcon onClick={() => setAppMode("selected")} icon={faXmark} size="4x" className="addXmark"/>
         <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
-        <FontAwesomeIcon onClick={handleNotesDelete} icon={faTrashCan} size="4x" className="deleteIcon"/>
+        <FontAwesomeIcon onClick={deleteNotesItem} icon={faTrashCan} size="4x" className="deleteIcon"/>
         <FontAwesomeIcon onClick={handleSubmitEditedNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
         )
@@ -67,7 +79,7 @@ const MainContainer = () => {
       return(
         <>
         <FontAwesomeIcon onClick={() => setAppMode("edit")} icon={faPenToSquare} size="4x" className="editIcon"/>
-        <FontAwesomeIcon onClick={handleNotesDelete} icon={faTrashCan} size="4x" className="deleteIcon"/>
+        <FontAwesomeIcon onClick={deleteNotesItem} icon={faTrashCan} size="4x" className="deleteIcon"/>
         </>
       )
 
@@ -86,17 +98,17 @@ const MainContainer = () => {
     .then(() => requestAll());
   }
 
-  const handleNotesDelete = async function(notesObj){
+  const handleNotesDelete = async function(){
     const request = new Request();
-    const url = "/api/notes/" + notesObj.id
+    const url = "/api/notes/" + selectedNotesItem.id
     request.delete(url)
     .then(() => requestAll())
   }
 
   const deleteNotesItem = () => {
-    let indexOfSelectedItem = notesItems.findIndex(x => x.id === selectedNotesItem.id);
-    console.log(indexOfSelectedItem)
-    setSelectedNotesItem(notesItems[indexOfSelectedItem])}
+    handleNotesDelete()
+    setAppMode("selected")
+  }
     
 
   
@@ -170,12 +182,17 @@ const MainContainer = () => {
     setAppMode("selected")
     setSelectedNotesItem(notesItemObject)
   }
+
+
+
+
+
   return (<>
     
     <div className="parent">
     <div className="div1">
-  <input className="searchInput" type="text" name="search" placeholder="Search.." />
-    <NotesList notesItems={notesItems} handleSelectNotesItemClick={(value) => handleSelectNotesItemClick(value)} />
+    <NotesSearch notesItems={notesItems} searchTerm={searchTerm} handleSearchTerm={(value) => setSearchTerm(value)} />
+    <NotesList searchTerm={searchTerm} searchResults={searchResults} notesItems={notesItems} handleSelectNotesItemClick={(value) => handleSelectNotesItemClick(value)} />
   
 
     <FontAwesomeIcon onClick={() => setAppMode("add")} icon={faPlusCircle} size="4x" className="addIcon"/>
