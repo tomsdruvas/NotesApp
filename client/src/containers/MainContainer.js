@@ -11,7 +11,7 @@ import {faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import NotesList from '../components/NotesList';
 import NotesContent from '../components/NotesContent';
 import NotesAdd from '../components/NotesAdd';
-import moment from 'moment';
+import NotesEdit from '../components/NotesEdit';
 
 
 
@@ -52,30 +52,59 @@ const MainContainer = () => {
       )
     }
     else if (appMode === "edit"){
-      <>
+      return(
+        <>
         <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
         <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
-        <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
-        <FontAwesomeIcon icon={faCheck} size="4x" className="checkIcon"/>
+        <FontAwesomeIcon onClick={handleNotesDelete} icon={faTrashCan} size="4x" className="deleteIcon"/>
+        <FontAwesomeIcon onClick={handleSubmitNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
+        )
 
     }
     else if (appMode === "selected"){
       return(
         <>
-        <FontAwesomeIcon icon={faPenToSquare} size="4x" className="editIcon"/>
-        <FontAwesomeIcon icon={faTrashCan} size="4x" className="deleteIcon"/>
+        <FontAwesomeIcon onClick={() => setAppMode("edit")} icon={faPenToSquare} size="4x" className="editIcon"/>
+        <FontAwesomeIcon onClick={handleNotesDelete} icon={faTrashCan} size="4x" className="deleteIcon"/>
         </>
       )
 
     }
   }
 
-  const handleNotesPost = function(notesItemObj){
+  const handleNotesPost = async function(notesItemObj){
     const request = new Request();
     request.post("/api/notes", notesItemObj)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      setSelectedNotesItem(data);
+    })
+    .then(() => requestAll());
+  }
+
+  const handleNotesDelete = function(){
+    const request = new Request();
+    const url = "/api/notes/" + selectedNotesItem.id
+    request.delete(url)
     .then(() => requestAll())
   }
+
+  const handleNotesUpdate = function(){
+    const request = new Request();
+    request.patch('/api/notes/' + selectedNotesItem.id, selectedNotesItem)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      setSelectedNotesItem(data);
+    })
+    .then(() => requestAll());
+  }
+
+
 
 
   const handleSubmitNotesItem = () => {
@@ -84,6 +113,14 @@ const MainContainer = () => {
          return alert("You have not filled everything in")
       }
       handleNotesPost(selectedNotesItem)
+      setAppMode("selected")
+    }
+    else {
+      if(!selectedNotesItem.title || !selectedNotesItem.content){
+        return alert("You have not filled everything in")
+     }
+      handleNotesUpdate(selectedNotesItem)
+      setAppMode("selected")
 
     }
   }
@@ -102,6 +139,14 @@ const MainContainer = () => {
     <NotesContent selectedNotesItem={selectedNotesItem} />
         </>
       )
+    }
+    else if (appMode === "edit"){
+      return(
+        <>
+          <NotesEdit selectedNotesItem={selectedNotesItem} handleEditedNotesObj={(editedNotesObj) => setSelectedNotesItem(editedNotesObj)} />
+        </>
+      )
+
     }
   }
 

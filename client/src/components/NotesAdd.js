@@ -10,6 +10,7 @@ const NotesAdd = ({handleNewNotesObj, selectedNotesItem}) => {
         handleNewNotesObj({
             ...selectedNotesItem,
         [e.target.name]: value,
+        id: null,
         postDate: moment().format('MMM Do YYYY, h:mm'),
         updateDate: moment().format('MMM Do YYYY, h:mm')
         });
@@ -18,9 +19,9 @@ const NotesAdd = ({handleNewNotesObj, selectedNotesItem}) => {
 
 
   return (
-    <form onChange={handleChange} action="submit">
-    <input required placeholder="Title" className="titleInput" type="text" name="title" id="" />
-    <textarea required className="contentInput" placeholder="Content of the notes" name="content" id="" cols="30" rows="10"></textarea>
+    <form  action="submit">
+    <input onChange={handleChange} required placeholder="Title" className="titleInput" type="text" name="title" id="" />
+    <textarea onChange={handleChange} required className="contentInput" placeholder="Content of the notes" name="content" id="" cols="30" rows="10"></textarea>
 
     </form>
   )
