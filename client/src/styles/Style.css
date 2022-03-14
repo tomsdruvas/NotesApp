@@ -24,7 +24,7 @@
 .div2 { 
     background-color:#a8dadc;
     width: 40%;
-    padding-top: 2%;
+    padding-top: 1%;
     text-align:center;
     border-radius: 0 15% 15% 0;
     border: 3px solid #457B9D;
@@ -53,7 +53,7 @@
     width: 85%;
     display: block;
     margin: 0 auto;
-    margin-top: 6%;
+    /* margin-top: 6%; */
     margin-bottom: 10%;
     border: 1px solid black;
     -webkit-box-shadow: inset 0px 0px 9px 1px rgba(0,0,0,0.15); 
@@ -209,6 +209,20 @@
     transform: scale(1.1);
 }
 
+.contentTitle {
+    font-size: 25px;
+    color: #000000;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 1%;
+}
+
+.contentDates {
+    font-size: 15px;
+    color: #000000;
+    font-weight: 400;
+    margin: 0;
+}
 
 
 

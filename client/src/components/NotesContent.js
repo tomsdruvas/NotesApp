@@ -4,10 +4,11 @@ import moment from 'moment';
 const NotesContent = ({selectedNotesItem}) => {
   return (
       <>
-    {selectedNotesItem.title ?? "Welcome!"}
-    <br />
-    Posted: {selectedNotesItem.postDate ?? moment().format('MMM Do YYYY, h:mm')}
-    Updated: {selectedNotesItem.updateDate ?? moment().format('MMM Do YYYY, h:mm')}
+    <p className="contentTitle">{selectedNotesItem.title ?? "Welcome!"}</p>
+   <p className="contentDates"> 
+   Posted: {selectedNotesItem.postDate ?? moment().format('MMM Do YYYY, h:mm')}
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Updated: {selectedNotesItem.updateDate ?? moment().format('MMM Do YYYY, h:mm')}</p>
 
     <div className="divForContent">
     {selectedNotesItem.content ?? "Welcome to my new notes taking app"}

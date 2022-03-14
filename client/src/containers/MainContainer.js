@@ -13,6 +13,9 @@ import NotesContent from '../components/NotesContent';
 import NotesAdd from '../components/NotesAdd';
 import NotesEdit from '../components/NotesEdit';
 import { NotesSearch } from '../components/NotesSearch';
+import Swal from 'sweetalert2';
+
+
 
 
 
@@ -29,7 +32,7 @@ const MainContainer = () => {
   const [activeEditNote, setActiveEditNote] = useState({});
   const [newNotesObject, setNewNotesObject] = useState({});
   const [searchResults, setSearchResults] = useState([]);
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const requestAll = function(){
     const request = new Request();
@@ -38,27 +41,28 @@ const MainContainer = () => {
     Promise.resolve(notesItemsPromise)
     .then((data) => {
       setNotesItems(data);
+      if(Object.keys(selectedNotesItem).length === 0){
+        setSelectedNotesItem(data[0])
+      }
     })
   }
 
   useEffect(()=>{
     requestAll();
-  }, [])
+  })
 
   useEffect(() => {
-
     const results = notesItems.filter(notesItem =>
       notesItem.title.toLowerCase().includes(searchTerm)
     );
     setSearchResults(results);
   }, [searchTerm, notesItems]);
 
-
   const showContentIcons = () => {
     if(appMode === "add"){
       return (
         <>
-        <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
+        <FontAwesomeIcon onClick={() => setAppMode("selected")} icon={faXmark} size="4x" className="addXmark"/>
         <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
         <FontAwesomeIcon onClick={handleSubmitNewNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
@@ -110,7 +114,7 @@ const MainContainer = () => {
     setAppMode("selected")
     setTimeout(() => {
       setSelectedNotesItem(notesItems[0])
-    }, 500);
+    }, 250);
   }
     
 
@@ -134,7 +138,12 @@ const MainContainer = () => {
   const handleSubmitNewNotesItem = () => {
     if (!newNotesObject.id){
       if(!newNotesObject.title || !newNotesObject.content){
-         return alert("You have not filled everything in!!!")
+         return Swal.fire({
+          title: 'Error!',
+          text: 'You need to to complete the title and content of the note',
+          icon: 'error',
+          confirmButtonText: 'Okay'
+        })
       }
       handleNotesPost(newNotesObject)
       setAppMode("selected")
@@ -143,7 +152,12 @@ const MainContainer = () => {
 
   const handleSubmitEditedNotesItem = () => {
     if(!activeEditNote.title || !activeEditNote.content){
-      return alert("You have not filled everything in")
+      return Swal.fire({
+        title: 'Error!',
+        text: 'You need to to complete the title and content of the note',
+        icon: 'error',
+        confirmButtonText: 'Cool'
+      })
    }
     handleNotesUpdate(activeEditNote)
     setAppMode("selected")
