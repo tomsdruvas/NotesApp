@@ -25,7 +25,8 @@ const MainContainer = () => {
   const [notesItems, setNotesItems] = useState([]);
   const [selectedNotesItem, setSelectedNotesItem] = useState({});
   const [appMode, setAppMode] = useState("selected");
-  // const [activeNote, setActiveNote] = useState({});
+  const [activeEditNote, setActiveEditNote] = useState({});
+  const [newNotesObject, setNewNotesObject] = useState({});
 
   const requestAll = function(){
     const request = new Request();
@@ -47,17 +48,17 @@ const MainContainer = () => {
         <>
         <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
         <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
-        <FontAwesomeIcon onClick={handleSubmitNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
+        <FontAwesomeIcon onClick={handleSubmitNewNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
       )
     }
     else if (appMode === "edit"){
       return(
         <>
-        <FontAwesomeIcon icon={faXmark} size="4x" className="addXmark"/>
+        <FontAwesomeIcon onClick={() => setAppMode("selected")} icon={faXmark} size="4x" className="addXmark"/>
         <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
         <FontAwesomeIcon onClick={handleNotesDelete} icon={faTrashCan} size="4x" className="deleteIcon"/>
-        <FontAwesomeIcon onClick={handleSubmitNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
+        <FontAwesomeIcon onClick={handleSubmitEditedNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
         )
 
@@ -85,16 +86,24 @@ const MainContainer = () => {
     .then(() => requestAll());
   }
 
-  const handleNotesDelete = function(){
+  const handleNotesDelete = async function(notesObj){
     const request = new Request();
-    const url = "/api/notes/" + selectedNotesItem.id
+    const url = "/api/notes/" + notesObj.id
     request.delete(url)
     .then(() => requestAll())
   }
 
-  const handleNotesUpdate = function(){
+  const deleteNotesItem = () => {
+    let indexOfSelectedItem = notesItems.findIndex(x => x.id === selectedNotesItem.id);
+    console.log(indexOfSelectedItem)
+    setSelectedNotesItem(notesItems[indexOfSelectedItem])}
+    
+
+  
+
+  const handleNotesUpdate = function(notesObj){
     const request = new Request();
-    request.patch('/api/notes/' + selectedNotesItem.id, selectedNotesItem)
+    request.patch('/api/notes/' + notesObj.id, notesObj)
     .then(function(response) {
       return response.json();
     })
@@ -107,29 +116,36 @@ const MainContainer = () => {
 
 
 
-  const handleSubmitNotesItem = () => {
-    if (!selectedNotesItem.id){
-      if(!selectedNotesItem.title || !selectedNotesItem.content){
-         return alert("You have not filled everything in")
+  const handleSubmitNewNotesItem = () => {
+    if (!newNotesObject.id){
+      if(!newNotesObject.title || !newNotesObject.content){
+         return alert("You have not filled everything in!!!")
       }
-      handleNotesPost(selectedNotesItem)
+      handleNotesPost(newNotesObject)
       setAppMode("selected")
-    }
-    else {
-      if(!selectedNotesItem.title || !selectedNotesItem.content){
-        return alert("You have not filled everything in")
-     }
-      handleNotesUpdate(selectedNotesItem)
-      setAppMode("selected")
-
     }
   }
+
+  const handleSubmitEditedNotesItem = () => {
+    if(!activeEditNote.title || !activeEditNote.content){
+      return alert("You have not filled everything in")
+   }
+    handleNotesUpdate(activeEditNote)
+    setAppMode("selected")
+
+  }
+
+    
+    
+
+    
+  
 
   const toggleComponent = () => {
     if (appMode === "add"){
       return(
         <>
-          <NotesAdd selectedNotesItem={selectedNotesItem} handleNewNotesObj={(newNotesObj) => setSelectedNotesItem(newNotesObj)} />
+          <NotesAdd newNotesObject={newNotesObject} handleNewNotesObj={(newNotesObj) => setNewNotesObject(newNotesObj)} />
         </>
       )
     }
@@ -143,7 +159,7 @@ const MainContainer = () => {
     else if (appMode === "edit"){
       return(
         <>
-          <NotesEdit selectedNotesItem={selectedNotesItem} handleEditedNotesObj={(editedNotesObj) => setSelectedNotesItem(editedNotesObj)} />
+          <NotesEdit selectedNotesItem={selectedNotesItem} handleEditedNotesObj={(editedNotesObj) => setActiveEditNote(editedNotesObj)} />
         </>
       )
 

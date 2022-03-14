@@ -3,12 +3,12 @@ import moment from 'moment';
 
 
 
-const NotesAdd = ({handleNewNotesObj, selectedNotesItem}) => {
+const NotesAdd = ({handleNewNotesObj, newNotesObject}) => {
 
     const handleChange = (e) => {
         const value = e.target.value;
         handleNewNotesObj({
-            ...selectedNotesItem,
+        ...newNotesObject,
         [e.target.name]: value,
         id: null,
         postDate: moment().format('MMM Do YYYY, h:mm'),

@@ -18,8 +18,8 @@ const NotesEdit = ({handleEditedNotesObj, selectedNotesItem}) => {
 
   return (
     <form action="submit">
-    <input onChange={handleChange} required value={selectedNotesItem.title} className="titleInput" type="text" name="title" id="" />
-    <textarea onChange={handleChange} required className="contentInput" value={selectedNotesItem.content} name="content" id="" cols="30" rows="10"></textarea>
+    <input onChange={handleChange} required defaultValue={selectedNotesItem.title} className="titleInput" type="text" name="title" id="" />
+    <textarea onChange={handleChange} required className="contentInput" defaultValue={selectedNotesItem.content} name="content" id="" cols="30" rows="10"></textarea>
 
     </form>
   )
