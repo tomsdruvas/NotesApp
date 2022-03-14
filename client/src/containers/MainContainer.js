@@ -46,7 +46,7 @@ const MainContainer = () => {
   }, [])
 
   useEffect(() => {
-    
+
     const results = notesItems.filter(notesItem =>
       notesItem.title.toLowerCase().includes(searchTerm)
     );
@@ -108,6 +108,9 @@ const MainContainer = () => {
   const deleteNotesItem = () => {
     handleNotesDelete()
     setAppMode("selected")
+    setTimeout(() => {
+      setSelectedNotesItem(notesItems[0])
+    }, 500);
   }
     
 
