@@ -156,7 +156,7 @@ const MainContainer = () => {
         title: 'Error!',
         text: 'You need to to complete the title and content of the note',
         icon: 'error',
-        confirmButtonText: 'Cool'
+        confirmButtonText: 'Okay'
       })
    }
     handleNotesUpdate(activeEditNote)
