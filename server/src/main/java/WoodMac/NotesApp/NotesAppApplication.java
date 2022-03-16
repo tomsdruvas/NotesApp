@@ -12,9 +12,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@ComponentScan({"com.delivery.request"})
-@EntityScan("com.delivery.domain")
-//@EnableJpaRepositories("com.delivery.repository")
+@EntityScan("WoodMac.NotesApp")
+@EnableJpaRepositories("WoodMac.NotesApp.repositories")
+@ComponentScan ({"com.server", "com.server.config"})
 public class NotesAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NotesAppApplication.class, args);
