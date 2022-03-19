@@ -33,6 +33,8 @@ const MainContainer = () => {
   const [newNotesObject, setNewNotesObject] = useState({});
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [contentValue, setContentValue] = useState("");
+
 
   const requestAll = function(){
     const request = new Request();
@@ -147,6 +149,7 @@ const MainContainer = () => {
       }
       handleNotesPost(newNotesObject)
       setAppMode("selected")
+      setContentValue("")
     }
   }
 
@@ -174,7 +177,7 @@ const MainContainer = () => {
     if (appMode === "add"){
       return(
         <>
-          <NotesAdd newNotesObject={newNotesObject} handleNewNotesObj={(newNotesObj) => setNewNotesObject(newNotesObj)} />
+          <NotesAdd newNotesObject={newNotesObject} handleNewNotesObj={(newNotesObj) => setNewNotesObject(newNotesObj)} contentValue={contentValue} setContentValue={(value)=>setContentValue(value)} />
         </>
       )
     }

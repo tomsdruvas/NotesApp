@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment';
+import MDEditor from '@uiw/react-md-editor';
 
 const NotesContent = ({selectedNotesItem}) => {
   return (
@@ -11,7 +12,8 @@ const NotesContent = ({selectedNotesItem}) => {
     Updated: {selectedNotesItem.updateDate ?? moment().format('MMM Do YYYY, h:mm')}</p>
 
     <div className="divForContent">
-    {selectedNotesItem.content ?? "Welcome to my new notes taking app"}
+    <MDEditor.Markdown source={selectedNotesItem.content ?? "Welcome to my new notes taking app"} />
+  
 
 
     <br />
