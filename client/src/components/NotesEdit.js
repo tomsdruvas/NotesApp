@@ -1,9 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import moment from 'moment';
+import MDEditor from '@uiw/react-md-editor';
 
 
 
-const NotesEdit = ({handleEditedNotesObj, selectedNotesItem}) => {
+
+const NotesEdit = ({handleEditedNotesObj, selectedNotesItem, contentValueEdit, setContentValueEdit}) => {
+
+  useEffect(()=>{
+    handleEditedNotesObj({...selectedNotesItem, content: contentValueEdit});
+  }, [contentValueEdit])
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -19,8 +25,12 @@ const NotesEdit = ({handleEditedNotesObj, selectedNotesItem}) => {
   return (
     <form action="submit">
     <input autoFocus={true} onChange={handleChange} required defaultValue={selectedNotesItem.title} className="titleInput" type="text" name="title" id="" />
-    <textarea onChange={handleChange} required className="contentInput" defaultValue={selectedNotesItem.content} name="content" id="" cols="30" rows="10"></textarea>
-
+    <MDEditor
+        onChange={setContentValueEdit}
+        required className="contentInput"  name="content" id="" 
+        value={contentValueEdit}
+      height={350}
+      />
     </form>
   )
 }

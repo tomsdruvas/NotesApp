@@ -34,6 +34,9 @@ const MainContainer = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [contentValue, setContentValue] = useState("");
+  const [contentValueEdit, setContentValueEdit] = useState("");
+
+
 
 
   const requestAll = function(){
@@ -51,7 +54,7 @@ const MainContainer = () => {
 
   useEffect(()=>{
     requestAll();
-  })
+  },[])
 
   useEffect(() => {
     const results = notesItems.filter(notesItem =>
@@ -84,7 +87,7 @@ const MainContainer = () => {
     else if (appMode === "selected"){
       return(
         <>
-        <FontAwesomeIcon onClick={() => setAppMode("edit")} icon={faPenToSquare} size="4x" className="editIcon"/>
+        <FontAwesomeIcon onClick={handleEditComponent} icon={faPenToSquare} size="4x" className="editIcon"/>
         <FontAwesomeIcon onClick={deleteNotesItem} icon={faTrashCan} size="4x" className="deleteIcon"/>
         </>
       )
@@ -117,6 +120,12 @@ const MainContainer = () => {
     setTimeout(() => {
       setSelectedNotesItem(notesItems[0])
     }, 250);
+  }
+
+  const handleEditComponent = () => {
+    setContentValueEdit(selectedNotesItem.content)
+    setAppMode("edit")
+
   }
     
 
@@ -191,7 +200,7 @@ const MainContainer = () => {
     else if (appMode === "edit"){
       return(
         <>
-          <NotesEdit selectedNotesItem={selectedNotesItem} handleEditedNotesObj={(editedNotesObj) => setActiveEditNote(editedNotesObj)} />
+          <NotesEdit selectedNotesItem={selectedNotesItem} handleEditedNotesObj={(editedNotesObj) => setActiveEditNote(editedNotesObj)} contentValueEdit={contentValueEdit} setContentValueEdit={(value) => setContentValueEdit(value)} />
         </>
       )
 

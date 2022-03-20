@@ -28,7 +28,6 @@ const NotesAdd = ({handleNewNotesObj, newNotesObject, contentValue, setContentVa
   return (
     <form action="submit">
     <input autoFocus={true} onChange={handleChange} required placeholder="Title" className="titleInput" type="text" name="title" id="" />
-    {/* <textarea onChange={handleChange} required className="contentInput" placeholder="Content of the notes" name="content" id="" cols="30" rows="10"></textarea> */}
     <MDEditor
         onChange={setContentValue}
         required className="contentInput"  name="content" id="" 
