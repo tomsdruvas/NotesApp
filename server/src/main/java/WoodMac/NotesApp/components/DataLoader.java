@@ -17,11 +17,14 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
 
-        NotesItem notesItem = new NotesItem("Notes examples title", "123", "456", "THis is going to be the text" );
+        NotesItem notesItem = new NotesItem("Soup recipe", "Mar 20th 2022, 9:24", "Mar 20th 2022, 9:30", "**Lorem ipsum dolor** sit amet, amet fabellas usu at. *Veritus postulant* pro eu, ~~mutat intellegat~~ ex eos, ex has quot animal `consectetuer`. Ad euismod tibique interpretaris nam, ut quo \n\n> doming\n\n copiosae" );
         notesItemRepository.save(notesItem);
 
-        NotesItem notesItem2 = new NotesItem("Notes wefwefexamples title", "121243", "452346", "THis is gfgsdfgdfgoing to be the text" );
+        NotesItem notesItem2 = new NotesItem("Sandwich recipe", "Mar 20th 2022, 9:35", "Mar 20th 2022, 9:40", "**Lorem ipsum dolor** Usu at. *Veritus postulant* pro eu, ~~mutat intellegat~~ ex eos, ex has quot animal `consectetuer`. Ad euismod tibique interpretaris nam, ut quo \n\n> doming\n\n copiosae " );
         notesItemRepository.save(notesItem2);
+
+        NotesItem notesItem3 = new NotesItem("To Do List", "Mar 20th 2022, 9:35", "Mar 20th 2022, 9:40", "- Lorem ipsum\n\n - **dolor sit amet**\n\n - ~~amet fabellas usu at.~~\n\n- *Veritus postulant pro eu, mutat*  " );
+        notesItemRepository.save(notesItem3);
 
 
 

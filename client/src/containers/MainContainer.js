@@ -46,7 +46,7 @@ const MainContainer = () => {
     Promise.resolve(notesItemsPromise)
     .then((data) => {
       setNotesItems(data);
-      if(selectedNotesItem != undefined){
+      if(selectedNotesItem !== undefined){
       if(Object.keys(selectedNotesItem).length === 0){
         setSelectedNotesItem(data[0])
       }
@@ -70,7 +70,7 @@ const MainContainer = () => {
       return (
         <>
         <FontAwesomeIcon onClick={handleCancelAdd} icon={faXmark} size="4x" className="addXmark"/>
-        <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
+        {/* <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/> */}
         <FontAwesomeIcon onClick={handleSubmitNewNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
       )
@@ -79,7 +79,7 @@ const MainContainer = () => {
       return(
         <>
         <FontAwesomeIcon onClick={() => setAppMode("selected")} icon={faXmark} size="4x" className="addXmark"/>
-        <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
+        {/* <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/> */}
         <FontAwesomeIcon onClick={deleteNotesItem} icon={faTrashCan} size="4x" className="deleteIcon"/>
         <FontAwesomeIcon onClick={handleSubmitEditedNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
