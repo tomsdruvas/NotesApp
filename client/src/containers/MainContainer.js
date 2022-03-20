@@ -116,12 +116,20 @@ const MainContainer = () => {
     .then(() => requestAll())
   }
 
-  const deleteNotesItem = () => {
-    handleNotesDelete()
-    setAppMode("selected")
-    setTimeout(() => {
-      setSelectedNotesItem(notesItems[0])
-    }, 250);
+  const deleteNotesItem = async () => {
+    if (notesItems.length === 1) {
+          await handleNotesDelete()
+          setAppMode("selected")
+          setTimeout(() => {
+            setSelectedNotesItem({})
+          }, 250);}
+    else {
+      handleNotesDelete()
+      setAppMode("selected")
+      setTimeout(() => {
+        setSelectedNotesItem(notesItems[0])
+      }, 250);
+  }
   }
 
   const handleEditComponent = () => {
