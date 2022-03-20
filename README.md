@@ -3,7 +3,7 @@ My task was to plan and develop a notes taking app that allows users to add note
 
 <h2>To Run Java Spring API Back-end</h2>
 
-<h4> Open "Notes app" server folder in IntelliJe and run the NotesAppApplication</h4>
+<h4> Open "Notes app" server folder in IntelliJ IDEA and run the NotesAppApplication</h4>
 <h4> To test if it's running go to http://localhost:8080/api/notes</h4>
 
 <h2>To Run RactJS Front-end</h2>
