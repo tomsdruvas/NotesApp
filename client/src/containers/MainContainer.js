@@ -46,9 +46,11 @@ const MainContainer = () => {
     Promise.resolve(notesItemsPromise)
     .then((data) => {
       setNotesItems(data);
+      if(selectedNotesItem != undefined){
       if(Object.keys(selectedNotesItem).length === 0){
         setSelectedNotesItem(data[0])
       }
+    }
     })
   }
 
