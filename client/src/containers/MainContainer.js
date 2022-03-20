@@ -67,7 +67,7 @@ const MainContainer = () => {
     if(appMode === "add"){
       return (
         <>
-        <FontAwesomeIcon onClick={() => setAppMode("selected")} icon={faXmark} size="4x" className="addXmark"/>
+        <FontAwesomeIcon onClick={handleCancelAdd} icon={faXmark} size="4x" className="addXmark"/>
         <FontAwesomeIcon icon={faUpload} size="4x" className="uploadIcon"/>
         <FontAwesomeIcon onClick={handleSubmitNewNotesItem} icon={faCheck} size="4x" className="checkIcon"/>
         </>
@@ -127,6 +127,15 @@ const MainContainer = () => {
     setAppMode("edit")
 
   }
+
+  const handleCancelAdd = () => {
+    setAppMode("selected")
+    setContentValue("")
+      setTimeout(() => {
+        setNewNotesObject({})
+      }, 100);
+
+  }
     
 
   
@@ -159,6 +168,10 @@ const MainContainer = () => {
       handleNotesPost(newNotesObject)
       setAppMode("selected")
       setContentValue("")
+      setTimeout(() => {
+        setNewNotesObject({})
+      }, 100);
+      
     }
   }
 
@@ -173,6 +186,9 @@ const MainContainer = () => {
    }
     handleNotesUpdate(activeEditNote)
     setAppMode("selected")
+    setTimeout(() => {
+      setActiveEditNote({})
+    }, 100);
 
   }
 
